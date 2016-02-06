@@ -1,0 +1,41 @@
+<navbar></navbar>
+
+<header class="hero-unit" id="banner">
+  <div class="container">
+    <h1 class="lead">Welcome to Apping made easy</h1>
+    <div class="row">
+      <div class="col-md-1" style="margin-top:250px">
+        <a href="#" ng-click="prev()">
+          <img src="assets/images/left_arrow.png" style="height:32px"/>
+        </a>
+      </div>
+        <div class="slide col-md-6" ng-repeat="image in images" ng-show="image.visible">
+          <img ng-src="{{image.src}}" style="width:500px;height:500px"/>
+        </div>
+      <div  class="col-md-1"  style="margin-top:250px">
+        <a href="#" ng-click="next()">
+          <img src="assets/images/right_arrow.png" style="height:32px"/>
+        </a>
+      </div>
+      <div class="col-md-4"  style="margin-top:150px">
+        <h3>
+          You can now organize all your applications at one place, set requirements and reminders for the deadlines and your custom tasks. 
+        </h3>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!--
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <h1 class="page-header">Features:</h1>
+      <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="thing in awesomeThings">
+        <li><a href="#" tooltip="{{thing.info}}">{{thing.name}}</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+-->
+<footer></footer>

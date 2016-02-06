@@ -1,0 +1,60 @@
+.drop-box {
+  background: #F8F8F8;
+  border: 5px dashed #DDD;
+  width: 270px;
+  height: 170px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top:30px;
+}
+
+.drop-box.dragover {
+  border: 5px dashed blue;
+}
+
+.drop-box.dragover-err {
+  border: 5px dashed red;
+}
+
+form .progress {
+    line-height: 15px;
+    margin-top: 25px;
+}
+
+.progress {
+    display: inline-block;
+    width: 270px;
+    border: 3px groove #CCC;
+}
+
+.progress div {
+    font-size: smaller;
+    background: orange;
+    width: 0;
+}
+
+.conditions{
+  margin-top: 25px;
+}
+
+.HEADLINE{
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size:24px;
+  margin-top: 5px; margin-bottom: 0px;
+  text-align: center;
+  font-weight: normal;
+  color: #222;
+}
+
+.SUBHEADLINE{
+  font-family: "Lucida Grande", Tahoma;
+  font-size: 10px;
+  font-weight: lighter;
+  font-variant: normal;
+  text-transform: uppercase;
+  color: #666666;
+  margin-top: 10px;
+  text-align: center!important;
+  letter-spacing: 0.3em;
+}

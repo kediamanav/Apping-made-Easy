@@ -1,0 +1,108 @@
+<navbar></navbar>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-4 col-md-offset-5">
+      <!--<img src="http://placehold.it/300x200" alt="{{product.title}}">-->
+      <div class="caption">
+        <img src="/assets/images/done.png" style="float:right;height:70px;width:130px" ng-show="university.finished"/>
+        <h1>Name : {{university.name}}</h1>
+        <p ng-show="university.fees.location">Location : {{university.location}}</p>
+        <p>Deadline : {{university.deadline | date:shortDate}}</p>
+        <p ng-show="university.fees.amount">Application Fees : {{university.fees.amount | currency:university.fees.currency}}</p>
+        <p>Program : {{university.program}}</p>
+
+        <p ng-show="university.exam.gpa.total" ng-class="{satisfied: scores.gpa.total>=university.exam.gpa.total, unsatisfied: scores.gpa.total<university.exam.gpa.total}">GPA : {{university.exam.gpa.total}}</p>
+
+        <p ng-show="university.exam.toefl.present||university.exam.gre.present||university.exam.ielts.present||university.exam.gmat.present||university.exam.lsat.present||university.exam.gre_subject.present">Exam Requirements</p>
+        
+        <ul>
+          <li ng-show="university.exam.toefl.present">
+            TOEFL  <ul>
+                      <li ng-show="university.exam.toefl.total" ng-class="{satisfied: scores.toefl.total>=university.exam.toefl.total, unsatisfied: scores.toefl.total<university.exam.toefl.total}">Total - {{university.exam.toefl.total}}</li>
+                      <li ng-show="university.exam.toefl.reading" ng-class="{satisfied: scores.toefl.reading>=university.exam.toefl.reading, unsatisfied: scores.toefl.reading<university.exam.toefl.reading}">Reading - {{university.exam.toefl.reading}}</li>
+                      <li ng-show="university.exam.toefl.listening" ng-class="{satisfied: scores.toefl.listening>=university.exam.toefl.listening, unsatisfied: scores.toefl.listening<university.exam.toefl.listening}">Listening - {{university.exam.toefl.listening}}</li>
+                      <li ng-show="university.exam.toefl.speaking" ng-class="{satisfied: scores.toefl.speaking>=university.exam.toefl.speaking, unsatisfied: scores.toefl.speaking<university.exam.toefl.speaking}">Speaking - {{university.exam.toefl.speaking}}</li>
+                      <li ng-show="university.exam.toefl.writing" ng-class="{satisfied: scores.toefl.writing>=university.exam.toefl.writing, unsatisfied: scores.toefl.writing<university.exam.toefl.writing}">Writing - {{university.exam.toefl.writing}}</li>
+                    </ul>
+          </li>
+
+          <li ng-show="university.exam.ielts.present">
+            IELTS  <ul>
+                      <li ng-show="university.exam.ielts.total" ng-class="{satisfied: scores.ielts.total>=university.exam.ielts.total, unsatisfied: scores.ielts.total<university.exam.ielts.total}">Total - {{university.exam.ielts.total}}</li>
+                      <li ng-show="university.exam.ielts.reading" ng-class="{satisfied: scores.ielts.reading>=university.exam.ielts.reading, unsatisfied: scores.ielts.reading<university.exam.ielts.reading}">Reading - {{university.exam.ielts.reading}}</li>
+                      <li ng-show="university.exam.ielts.listening" ng-class="{satisfied: scores.ielts.listening>=university.exam.ielts.listening, unsatisfied: scores.ielts.listening<university.exam.ielts.listening}">Listening - {{university.exam.ielts.listening}}</li>
+                      <li ng-show="university.exam.ielts.speaking" ng-class="{satisfied: scores.ielts.speaking>=university.exam.ielts.speaking, unsatisfied: scores.ielts.speaking<university.exam.ielts.speaking}">Speaking - {{university.exam.ielts.speaking}}</li>
+                      <li ng-show="university.exam.ielts.writing" ng-class="{satisfied: scores.ielts.writing>=university.exam.ielts.writing, unsatisfied: scores.ielts.writing<university.exam.ielts.writing}">Writing - {{university.exam.ielts.writing}}</li>
+                    </ul>
+          </li>
+
+          <li ng-show="university.exam.gre.present">
+            GRE  <ul>
+                    <li ng-show="university.exam.gre.verbal" ng-class="{satisfied: scores.gre.verbal>=university.exam.gre.verbal, unsatisfied: scores.gre.verbal<university.exam.gre.verbal}">Verbal - {{university.exam.gre.verbal}}</li>
+                    <li ng-show="university.exam.gre.quant" ng-class="{satisfied: scores.gre.quant>=university.exam.gre.quant, unsatisfied: scores.gre.quant<university.exam.gre.quant}">Quant - {{university.exam.gre.quant}}</li>
+                    <li ng-show="university.exam.gre.awa" ng-class="{satisfied: scores.gre.awa>=university.exam.gre.awa, unsatisfied: scores.gre.awa<university.exam.gre.awa}">AWA - {{university.exam.gre.awa}}</li>
+                  </ul>
+          </li>
+
+          <li ng-show="university.exam.gre_subject.present">
+            GRE SUBJECT  <ul>
+                    <li ng-show="university.exam.gre_subject.subject">Subject - {{university.exam.gre_subject.subject}}</li>
+                    <li ng-show="university.exam.gre_subject.total" ng-class="{satisfied: scores.gre_subject.total>=university.exam.gre_subject.total, unsatisfied: scores.gre_subject.total<university.exam.gre_subject.total}">Total - {{university.exam.gre_subject.total}}</li>
+                    <li ng-show="university.exam.gre_subject.subtotal" ng-class="{satisfied: scores.gre_subject.subtotal>=university.exam.gre_subject.subtotal, unsatisfied: scores.gre_subject.subtotal<university.exam.gre_subject.subtotal}">Sub Total - {{university.exam.gre_subject.subtotal}}</li>
+                  </ul>
+          </li>
+
+          <li ng-show="university.exam.gmat.present">
+            GMAT  <ul>
+                    <li ng-show="university.exam.gmat.total" ng-class="{satisfied: scores.gmat.total>=university.exam.gmat.total, unsatisfied: scores.gmat.total<university.exam.gmat.total}">Total - {{university.exam.gmat.total}}</li>
+                    <li ng-show="university.exam.gmat.verbal" ng-class="{satisfied: scores.gmat.verbal>=university.exam.gmat.verbal, unsatisfied: scores.gmat.verbal<university.exam.gmat.verbal}">Verbal - {{university.exam.gmat.verbal}}</li>
+                    <li ng-show="university.exam.gmat.quant" ng-class="{satisfied: scores.gmat.quant>=university.exam.gmat.quant, unsatisfied: scores.gmat.quant<university.exam.gmat.quant}">Quant - {{university.exam.gmat.quant}}</li>
+                    <li ng-show="university.exam.gmat.awa" ng-class="{satisfied: scores.gmat.awa>=university.exam.gmat.awa, unsatisfied: scores.gmat.awa<university.exam.gmat.awa}">AWA - {{university.exam.gmat.awa}}</li>
+                    <li ng-show="university.exam.gmat.reading" ng-class="{satisfied: scores.gmat.reading>=university.exam.gmat.reading, unsatisfied: scores.gmat.reading<university.exam.gmat.reading}">Integrated Reading - {{university.exam.gmat.reading}}</li>
+                  </ul>
+          </li>
+
+          <li ng-show="university.exam.lsat.present">
+            LSAT  <ul>
+                    <li ng-show="university.exam.lsat.total" ng-class="{satisfied: scores.lsat.total>=university.exam.lsat.total, unsatisfied: scores.lsat.total<university.exam.lsat.total}">Total - {{university.exam.lsat.total}}</li>
+                  </ul>
+          </li>
+        </ul>
+
+
+        <p ng-show="university.portal.link">Portal link : <a ng-href="{{university.portal.link}}">{{university.portal.link}}</a></p>
+        <p ng-show="university.portal.username">Portal username : {{university.portal.username}}</p>
+        <p ng-show="university.portal.password">Portal password : {{university.portal.password}}</p>
+        <p ng-show="university.contact_email">University email : {{university.contact_email}}</p>
+        <p ng-show="university.rate">Acceptance Rate : {{university.rate}} %</p>
+
+        <p ng-show="university.recommenders.name.length>0">Recommenders</p>
+        <ul ng-repeat="name in university.recommenders.name">
+          <li><label class="checkbox-inline">{{name}}<input type="checkbox" ng-disabled="true" checklist-model="university.recommenders.done" checklist-value="name"></label></li>
+        </ul>
+
+        <p ng-show="university.documents.docs.length>0">Documents required</p>
+        <ul ng-repeat="doc in university.documents.docs">
+          <li><label class="checkbox-inline">{{doc}}<input type="checkbox" ng-disabled="true" checklist-model="university.documents.done" checklist-value="doc"></label></li>
+        </ul>
+
+        <p ng-show="university.tasks.task.length>0">Custom tasks</p>
+        <ul ng-repeat="task in university.tasks.task">
+          <li><label class="checkbox-inline">{{task}}<input type="checkbox" ng-disabled="true" checklist-model="university.tasks.done" checklist-value="task"></label></li>
+        </ul>
+
+        <!--<p>SOP : {{university.sop}}</p>-->  
+        <p>
+          <a ui-sref="universities" class="btn btn-default" role="button">Back</a>
+          <button ng-click="closeApplication(university._id)" class="btn btn-success" role="button" ng-hide="university.finished">Close</button>
+          <button ng-click="openApplication(university._id)" class="btn btn-warning" role="button" ng-show="university.finished">Reopen</button>
+          <a ui-sref="editUniversity({id: university._id})" class="btn btn-primary" role="button" ng-hide="university.finished">Edit</a>
+          <a class="btn btn-danger" ng-click="deleteUniversity()">Delete</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer></footer>

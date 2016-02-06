@@ -1,0 +1,385 @@
+<div ng-show="errors" class="alert alert-danger" role="alert">
+  <strong>Error(s):</strong>
+  <p>{{errors}}</p>
+</div>
+
+<div class="form-group">
+  <label for="location" class="col-md-offset-2 col-md-2 control-label">Location</label>
+  <div class="col-md-3">
+    <input type="text" ng-model="university.location" class="form-control" id="location" placeholder="University's location"/>
+  </div>
+</div>
+
+<div class="form-group">
+  <label for="deadline" class="col-md-offset-2 col-md-2 control-label">Deadline*</label>
+  <div class="col-md-3">
+    <p class="input-group">
+      <!--min-date="minDate" max-date="maxDate" -->
+      <input type="text" required class="form-control" datepicker-popup="shortDate" ng-model="university.deadline" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close"/>
+      <span class="input-group-btn">
+        <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+      </span>
+    </p>
+  </div>
+</div>
+
+<div class="form-group">
+  <label for="program" class="col-md-offset-2 col-md-2 control-label">Program*</label>
+  <div class="col-md-3">
+    <input type="text" required ng-model="university.program" class="form-control" id="program" placeholder="Program you are applying to"/>
+  </div>
+</div>
+
+<div class="form-group">
+  <label for="fees" class="col-md-offset-2 col-md-2 control-label">Fees</label>
+  <div class="col-md-3">
+    <div class="input-group">
+      <input type="number" min=0 ng-model="university.fees.amount" class="form-control" id="fees" placeholder="Application fees"/>
+      <div class="input-group-addon">
+      <select class="form control" ng-model="university.fees.currency" ng-options="c.currency as c.currency for c in currency"></select>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="form-group">
+  <label for="gpa" class="col-md-offset-2 col-md-2 control-label">GPA</label>
+  <div class="col-md-3">
+    <input type="number" min=0 step="0.01" max="100" ng-model="university.exam.gpa.total" class="form-control" id="gpa_total" placeholder="GPA"/>
+  </div>
+</div>
+
+
+<!-- English requirements-->
+<div class="form-group">
+  <label for="English" class="col-md-2 control-label">English Proficiency Tests</label>
+</div>
+
+
+<!-- TOEFL SCORES-->
+<div class="form-group">
+  <label class="checkbox-inline col-md-offset-1">TOEFL<input type="checkbox" ng-model="university.exam.toefl.present" ng-change="toggleSync('toefl',university.exam.toefl.present)"></label>
+  <div ng-show="university.exam.toefl.present">
+    <div class="form-group">
+      <label for="toefl_total" class="col-md-4 control-label">Total : </label>
+      <div class="col-md-2">
+        <input type="number" min=0 max=120 ng-model="university.exam.toefl.total" class="form-control" id="toefl_total" placeholder="Total"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="toefl_reading" class="col-md-offset-3 col-md-1 control-label">Reading : </label>
+      <div class="col-md-2">
+        <input type="number" min=0 max=30 ng-model="university.exam.toefl.reading" class="form-control" id="toefl_reading" placeholder="Reading"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="toefl_listening" class="col-md-offset-3 col-md-1 control-label">Listening:</label>
+      <div class="col-md-2">
+        <input type="number" min=0 max=30 ng-model="university.exam.toefl.listening" class="form-control" id="toefl_listening" placeholder="Listening"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="toefl_speaking" class="col-md-offset-3 col-md-1 control-label">Speaking:</label>
+      <div class="col-md-2">
+        <input type="number" min=0 max=30 ng-model="university.exam.toefl.speaking" class="form-control" id="toefl_speaking" placeholder="Speaking"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="toefl_writing" class="col-md-offset-3 col-md-1 control-label">Writing : </label>
+      <div class="col-md-2">
+        <input type="number" min=0 max=30 ng-model="university.exam.toefl.writing" class="form-control" id="toefl_writing" placeholder="Writing"/>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- IELTS SCORES-->
+<div class="form-group">
+  <label class="checkbox-inline col-md-offset-1">IELTS<input type="checkbox" ng-model="university.exam.ielts.present" ng-change="toggleSync('ielts',university.exam.ielts.present)"></label>
+  <div ng-show="university.exam.ielts.present">
+    <div class="form-group">
+      <label for="ielts_total" class="col-md-4 control-label">Total : </label>
+      <div class="col-md-2">
+        <input type="number" min=1 max=9 step=0.5 ng-model="university.exam.ielts.total" class="form-control" id="ielts_total" placeholder="Total"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="ielts_reading" class="col-md-offset-3 col-md-1 control-label">Reading : </label>
+      <div class="col-md-2">
+        <input type="number" min=1 max=9 step=0.5 ng-model="university.exam.ielts.reading" class="form-control" id="ielts_reading" placeholder="Reading"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="ielts_listening" class="col-md-offset-3 col-md-1 control-label">Listening:</label>
+      <div class="col-md-2">
+        <input type="number" min=1 max=9 step=0.5 ng-model="university.exam.ielts.listening" class="form-control" id="ielts_listening" placeholder="Listening"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="ielts_speaking" class="col-md-offset-3 col-md-1 control-label">Speaking:</label>
+      <div class="col-md-2">
+        <input type="number" min=1 max=9 step=0.5 ng-model="university.exam.ielts.speaking" class="form-control" id="ielts_speaking" placeholder="Speaking"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="ielts_writing" class="col-md-offset-3 col-md-1 control-label">Writing : </label>
+      <div class="col-md-2">
+        <input type="number" min=1 max=9 step=0.5 ng-model="university.exam.ielts.writing" class="form-control" id="ielts_writing" placeholder="Writing"/>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Graduate level requirements-->
+<div class="form-group">
+  <label for="msphd" class="col-md-2 control-label">For Masters/PhD</label>
+</div>
+
+
+<!-- GRE SCORES-->
+<div class="form-group">
+  <label class="checkbox-inline col-md-offset-1">GRE<input type="checkbox" ng-model="university.exam.gre.present" ng-change="toggleSync('gre',university.exam.gre.present)"></label>
+  <div ng-show="university.exam.gre.present">
+    <div class="form-group">
+        <label for="gre_verbal" class="col-md-4 control-label">Verbal : </label>
+        <div class="col-md-2">
+          <input type="number" min=130 max=170 ng-model="university.exam.gre.verbal" class="form-control" id="gre_verbal" placeholder="Verbal"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="gre_quant" class="col-md-offset-3 col-md-1 control-label">Quant : </label>
+        <div class="col-md-2">
+          <input type="number" min=130 max=170 ng-model="university.exam.gre.quant" class="form-control" id="gre_quant" placeholder="Quant"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="gre_awa" class="col-md-offset-3 col-md-1 control-label">AWA : </label>
+        <div class="col-md-2">
+          <input type="number" min=0 max=6 step="0.5" ng-model="university.exam.gre.awa" class="form-control" id="gre_awa" placeholder="AWA"/>
+        </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- GRE SUBJECT SCORES-->
+<div class="form-group">
+    <label class="checkbox-inline col-md-offset-1">GRE Subject<input type="checkbox" ng-model="university.exam.gre_subject.present" ng-change="toggleSync('gre_subject',university.exam.gre_subject.present)"></label>
+    <div ng-show="university.exam.gre_subject.present">
+      <div class="form-group">
+          <label for="gre_subject_subject" class="col-md-4 control-label">Subject : </label>
+          <div class="col-md-2">
+            <select ng-model="university.exam.gre_subject.subject" class="form-control" id="gre_subject_subject" placeholder="Subject">
+              <option>Biochemistry, Cell and Molecular Biology</option>
+              <option>Biology</option>
+              <option>Chemistry</option>
+              <option>Literature in English</option>
+              <option>Mathematics</option>
+              <option>Physics</option>
+              <option>Psychology</option>
+            </select>
+          </div>
+      </div>
+      <div class="form-group">
+          <label for="gre_subject_total" class="col-md-4 control-label">Total : </label>
+          <div class="col-md-2">
+            <input type="number" min=200 max=990 ng-model="university.exam.gre_subject.total" class="form-control" id="gre_subject_total" placeholder="Total"/>
+          </div>
+      </div>
+      <div class="form-group">
+          <label for="gre_subject_subtotal" class="col-md-4 control-label">Sub Score : </label>
+          <div class="col-md-2">
+            <input type="number" min=20 max=99 ng-model="university.exam.gre_subject.subtotal" class="form-control" id="gre_subject_subtotal" placeholder="Sub Total"/>
+          </div>
+      </div>
+    </div>
+</div>
+
+
+<!-- GMAT SCORES-->
+<div class="form-group">
+  <label class="checkbox-inline col-md-offset-1">GMAT<input type="checkbox" ng-model="university.exam.gmat.present" ng-change="toggleSync('gmat',university.exam.gmat.present)"></label>
+  <div ng-show="university.exam.gmat.present">
+    <div class="form-group">
+        <label for="gmat_total" class="col-md-4 control-label">Total : </label>
+        <div class="col-md-2">
+          <input type="number" min=200 max=800 ng-model="university.exam.gmat.total" class="form-control" id="gmat_total" placeholder="Total"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="gmat_verbal" class="col-md-4 control-label">Verbal : </label>
+        <div class="col-md-2">
+          <input type="number" min=0 max=60 ng-model="university.exam.gmat.verbal" class="form-control" id="gmat_verbal" placeholder="Verbal"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="gmat_quant" class="col-md-offset-3 col-md-1 control-label">Quant : </label>
+        <div class="col-md-2">
+          <input type="number" min=0 max=60 ng-model="university.exam.gmat.quant" class="form-control" id="gmat_quant" placeholder="Quant"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="gmat_awa" class="col-md-offset-3 col-md-1 control-label">AWA : </label>
+        <div class="col-md-2">
+          <input type="number" min=0 max=6 step="0.5" ng-model="university.exam.gmat.awa" class="form-control" id="gmat_awa" placeholder="AWA"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="gmat_reading" class="col-md-offset-3 col-md-1 control-label">Integrated Reading : </label>
+        <div class="col-md-2">
+          <input type="number" min=1 max=8 step="0.5" ng-model="university.exam.gmat.reading" class="form-control" id="gmat_reading" placeholder="Integrated Reading"/>
+        </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- LSAT SCORES-->
+<div class="form-group">
+    <label class="checkbox-inline col-md-offset-1">LSAT<input type="checkbox" ng-model="university.exam.lsat.present" ng-change="toggleSync('lsat',university.exam.lsat.present)"></label>
+    <div ng-show="university.exam.lsat.present">
+      <div class="form-group">
+          <label for="lsat_total" class="col-md-4 control-label">Total : </label>
+          <div class="col-md-2">
+            <input type="number" min=120 max=180 ng-model="university.exam.lsat.total" class="form-control" id="lsat_total" placeholder="Total"/>
+          </div>
+      </div>
+    </div>
+</div>
+
+
+<!--
+<div class="form-group">
+    <label class="checkbox-inline col-md-offset-1">USMLE<input type="checkbox" ng-model="university.exam.usmle.present"></label>
+</div>
+<div class="form-group">
+    <label class="checkbox-inline col-md-offset-1">GGFNS<input type="checkbox" ng-model="university.exam.ggfns.present"></label>
+</div>
+-->
+
+
+<!-- Undergrad level requirements-->
+<!--
+<div class="form-group">
+  <label for="ug" class="col-md-2 control-label">For undergraduates</label>
+</div>
+-->
+
+<!-- SAT1 SCORES-->
+<!--
+<div class="form-group">
+  <label class="checkbox-inline col-md-offset-1">SAT - 1<input type="checkbox" ng-model="university.exam.sat1.present"></label>
+  <div ng-show="university.exam.sat1.present">
+    <div class="form-group">
+      <label for="sat1_total" class="col-md-4 control-label">Total : </label>
+      <div class="col-md-2">
+        <input type="number" min=400 max=1600 ng-model="university.exam.sat1.total" class="form-control" id="sat1_total" placeholder="Total"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="sat1_verbal" class="col-md-offset-3 col-md-1 control-label">Verbal : </label>
+      <div class="col-md-2">
+        <input type="number" min=200 max=800 ng-model="university.exam.sat1.verbal" class="form-control" id="sat1_verbal" placeholder="Reading"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="sat1_maths" class="col-md-offset-3 col-md-1 control-label">Mathematics:</label>
+      <div class="col-md-2">
+        <input type="number" min=200 max=800 ng-model="university.exam.sat1.maths" class="form-control" id="sat1_maths" placeholder="Listening"/>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="form-group">
+    <label class="checkbox-inline col-md-offset-1">SAT - 2<input type="checkbox" ng-model="university.exam.sat2.present"></label>
+</div>
+-->
+
+<div class="form-group">
+  <label for="portal_link" class="col-md-2  col-md-offset-2 control-label">Portal link</label>
+  <div class="col-md-3">
+    <input type="url" ng-model="university.portal.link" class="form-control" id="portal_link" placeholder="Application Link"/>
+  </div>
+</div>
+
+<div class="form-group">
+  <label for="portal_username" class="col-md-2  col-md-offset-2 control-label">Portal Username</label>
+  <div class="col-md-3">
+    <input type="text" ng-model="university.portal.username" class="form-control" id="portal_username" placeholder="Application username"/>
+  </div>
+</div>
+
+<div class="form-group">
+  <label for="portal_password" class="col-md-2  col-md-offset-2 control-label">Portal Password</label>
+  <div class="col-md-3">
+    <input type="text" ng-model="university.portal.password" class="form-control" id="portal_password" placeholder="Application password"/>
+  </div>
+</div>
+
+<div class="form-group">
+  <label for="contact_email" class="col-md-2  col-md-offset-2 control-label">Contact Email</label>
+  <div class="col-md-3">
+    <input type="email" ng-model="university.contact_email" class="form-control" id="contact_email" placeholder="University email"/>
+  </div>
+</div>
+
+<div class="form-group">
+  <label for="rate" class="col-md-2  col-md-offset-2 control-label">Acceptance rate</label>
+  <div class="col-md-3">
+    <div class="input-group">
+      <input type="number" min=0 max=100 step=0.01 ng-model="university.rate" class="form-control" id="rate" placeholder="University's acceptance rate"/>
+      <div class="input-group-addon">%</div>
+    </div>
+  </div>
+</div>
+
+<div class="form-group">
+  <label for="recommenders" class="col-md-2 control-label">Recommenders</label>
+  <div class="col-md-9">
+    <input type="text" ng-model="university.recommender" class="form-control" id="recommender" placeholder="Add a new recommender to track his submission status"/>
+  </div>
+  <a class="btn btn-primary" ng-click="addRecommender(university.recommender)" ng-show="university.recommender.length">Add</a>
+</div>
+
+<div class="form-group">
+  <div class="col-md-offset-2 col-md-2" ng-repeat="name in university.recommenders.name">
+    <label class="checkbox-inline"><input type="checkbox" checklist-model="university.recommenders.done" checklist-value="name">{{name}}</label>
+    <a class="btn" ng-click="removeRecommender(name)">&#x2613</a>
+  </div>
+</div>
+
+
+<div class="form-group">
+  <label for="requirements" class="col-md-2 control-label">Documents Required</label>
+  <div class="col-md-9">
+    <select class="form-control" ng-model="curDocument" ng-options="c.doc as c.doc for c in documents"></select>
+  </div>
+  <a class="btn btn-primary" ng-click="addDocument(curDocument)"  ng-show="curDocument">Add</a>
+</div>
+
+<div class="form-group">
+  <div class="col-md-offset-2 col-md-2" ng-repeat="doc in university.documents.docs">
+    <label class="checkbox-inline"><input type="checkbox" checklist-model="university.documents.done" checklist-value="doc">{{doc}}</label>
+    <a class="btn" ng-click="removeDocument(doc)">&#x2613</a>
+  </div>
+</div>
+
+
+<div class="form-group">
+  <label for="requirements" class="col-md-2 control-label">Custom tasks</label>
+  <div class="col-md-9">
+    <input type="text" ng-model="cus_task" class="form-control" name="custom_tasks" id="custom_task" placeholder="Add a custom task"></select>
+  </div>
+  <a class="btn btn-primary" ng-click="addTask(cus_task)" ng-show="cus_task">Add</a>
+</div>
+
+<div class="form-group">
+  <div class="col-md-offset-2 col-md-2" ng-repeat="task in university.tasks.task">
+    <label class="checkbox-inline"><input type="checkbox" checklist-model="university.tasks.done" checklist-value="task">{{task}}</label>
+    <a class="btn" ng-click="removeTask(task)">&#x2613</a>
+  </div>
+</div>

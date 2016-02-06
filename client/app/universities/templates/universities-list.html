@@ -1,0 +1,51 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <h1>Applications</h1>
+      <p ng-show="universities.length < 1">No applications to show.</p>
+      <a ui-sref="newUniversity">New application</a>
+      <br>
+      <a ng-show="universities.length>0" ng-click="finishToggler(hideFinished)">{{finishText}}</a>
+    </div>
+  </div>
+
+  <div class="row" ng-show="universities.length>0">
+    <div class="col-md-offset-9 col-md-1">
+      <p>Sort by :</p>
+    </div>
+    <div class="col-md-2" style="margin-left:-25px">
+      <select ng-model="sorter">
+        <option value="[deadline,program]">Deadline</option>
+        <option value="[program,deadline]">Program and deadline</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4" ng-repeat="university in universities | orderBy: sorter" ng-hide="hideFinished && university.finished">
+      <div class="thumbnail">
+        <!--<img src="http://placehold.it/300x200" alt="{{product.title}}">-->
+        <div class="caption">
+          <img src="/assets/images/done.png" style="float:right;height:70px;width:130px" ng-show="university.finished"/>
+          
+          
+          <h2>{{university.name}}</h2>
+          <p>Program : {{university.program}}</p>
+          <p>Deadline : {{university.deadline | date:shortDate }}</p>
+          <span>Application status : {{(university.tasks.task.length+university.recommenders.name.length+university.documents.docs.length)>0?((university.tasks.done.length+university.recommenders.done.length+university.documents.done.length)/(university.tasks.task.length+university.recommenders.name.length+university.documents.docs.length)*100) : 100 | number:0}}% Complete ({{(university.tasks.task.length+university.recommenders.name.length+university.documents.docs.length)-(university.tasks.done.length+university.recommenders.done.length+university.documents.done.length)}} tasks left)</span>
+
+          <div class="tracker orange">
+            <span class="app_progress" style="width:{{(university.tasks.task.length+university.recommenders.name.length+university.documents.docs.length)>0?((university.tasks.done.length+university.recommenders.done.length+university.documents.done.length)/(university.tasks.task.length+university.recommenders.name.length+university.documents.docs.length)*325) : 325}}px"></span>
+          </div>
+          <p>
+            <button ng-click="closeApplication(university._id)" class="btn btn-success" role="button" ng-show="!university.finished">Close</button>
+            <button ng-click="openApplication(university._id)" class="btn btn-warning " role="button" ng-show="university.finished">Reopen</button>
+            <a ui-sref="viewUniversity({id: university._id})" class="btn btn-primary" role="button" style="float:right">Edit</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

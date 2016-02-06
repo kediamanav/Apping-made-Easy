@@ -1,0 +1,36 @@
+<navbar></navbar>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-6 col-md-4 col-md-offset-2">
+      <!--<img src="http://placehold.it/300x200" alt="{{product.title}}">-->
+      <div class="caption">
+        <h3>Name : {{university.name}}</h3>
+        <p>Location : {{university.location}}</p>
+        <p>Deadline : {{university.deadline | date:shortDate}}</p>
+        <p>Application Fees : {{university.fees | currency}}</p>
+        <p>Program : {{university.program}}</p>
+        <p>College Requirements</p>
+        <ul ng-repeat="need in university.requirements">
+          <li>{{need}}</li>
+        </ul>
+        <p>Documents required</p>
+        <ul ng-repeat="need in university.docs">
+          <li ng-show="{{need.present}}">{{need.doc}}</li>
+        </ul>
+        <p>Portal link : <a ng-href="{{university.portal.link}}">{{university.portal.link}}</a></p>
+        <p>Portal username : {{university.portal.username}}</p>
+        <p>Portal password : {{university.portal.password}}</p>
+        <p>Acceptance Rate : {{university.rate}}</p>
+        <p>SOP : {{university.sop}}</p>
+        <p>
+          <a ui-sref="universities" class="btn btn-default" role="button">Back</a>
+          <a ui-sref="editUniversity({id: university._id})" class="btn btn-primary" role="button">Edit</a>
+          <a class="btn btn-danger" ng-click="deleteUniversity()">Delete</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer></footer>

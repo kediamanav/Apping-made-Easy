@@ -1,0 +1,275 @@
+<navbar></navbar>
+
+<div class="container">
+  <h1>My Scores</h1><h4>(Fill in your scores to enable criteria matching)</h4>
+  <form class="form-horizontal" role="form" ng-submit="updateScores()">      
+
+      <div ng-show="errors" class="alert alert-danger" role="alert">
+        <strong>Error(s):</strong>
+        <p>{{errors}}</p>
+      </div>
+
+     	<div class="form-group">
+	      <label for="gpa" class="col-md-4 control-label">GPA :</label>
+	      <div class="col-md-2 ">
+	        <input type="number" min=0 step="0.01" max="100" ng-model="scores.gpa.total" class="form-control" id="gpa_total" placeholder="GPA"/>
+	      </div>
+	    </div>
+
+      <!-- English requirements-->
+      <div class="form-group">
+        <label for="English" class="col-md-2 control-label">English Proficiency Tests</label>
+      </div>
+
+
+      <!-- TOEFL SCORES-->
+      <div class="form-group">
+        <label class="checkbox-inline col-md-offset-1">TOEFL<input type="checkbox" ng-model="scores.toefl.present" ng-change="toggleSync('toefl',scores.toefl.present)"></label>
+        <div ng-show="scores.toefl.present">
+          <div class="form-group">
+            <label for="toefl_total" class="col-md-4 control-label">Total : </label>
+            <div class="col-md-2">
+              <input type="number" min=0 max=120 ng-model="scores.toefl.total" class="form-control" id="toefl_total" placeholder="Total"/>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="toefl_reading" class="col-md-offset-3 col-md-1 control-label">Reading : </label>
+            <div class="col-md-2">
+              <input type="number" min=0 max=30 ng-model="scores.toefl.reading" class="form-control" id="toefl_reading" placeholder="Reading"/>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="toefl_listening" class="col-md-offset-3 col-md-1 control-label">Listening:</label>
+            <div class="col-md-2">
+              <input type="number" min=0 max=30 ng-model="scores.toefl.listening" class="form-control" id="toefl_listening" placeholder="Listening"/>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="toefl_speaking" class="col-md-offset-3 col-md-1 control-label">Speaking:</label>
+            <div class="col-md-2">
+              <input type="number" min=0 max=30 ng-model="scores.toefl.speaking" class="form-control" id="toefl_speaking" placeholder="Speaking"/>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="toefl_writing" class="col-md-offset-3 col-md-1 control-label">Writing : </label>
+            <div class="col-md-2">
+              <input type="number" min=0 max=30 ng-model="scores.toefl.writing" class="form-control" id="toefl_writing" placeholder="Writing"/>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- IELTS SCORES-->
+      <div class="form-group">
+        <label class="checkbox-inline col-md-offset-1">IELTS<input type="checkbox" ng-model="scores.ielts.present" ng-change="toggleSync('ielts',scores.ielts.present)"></label>
+        <div ng-show="scores.ielts.present">
+          <div class="form-group">
+            <label for="ielts_total" class="col-md-4 control-label">Total : </label>
+            <div class="col-md-2">
+              <input type="number" min=1 max=9 step=0.5 ng-model="scores.ielts.total" class="form-control" id="ielts_total" placeholder="Total"/>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="ielts_reading" class="col-md-offset-3 col-md-1 control-label">Reading : </label>
+            <div class="col-md-2">
+              <input type="number" min=1 max=9 step=0.5 ng-model="scores.ielts.reading" class="form-control" id="ielts_reading" placeholder="Reading"/>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="ielts_listening" class="col-md-offset-3 col-md-1 control-label">Listening:</label>
+            <div class="col-md-2">
+              <input type="number" min=1 max=9 step=0.5 ng-model="scores.ielts.listening" class="form-control" id="ielts_listening" placeholder="Listening"/>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="ielts_speaking" class="col-md-offset-3 col-md-1 control-label">Speaking:</label>
+            <div class="col-md-2">
+              <input type="number" min=1 max=9 step=0.5 ng-model="scores.ielts.speaking" class="form-control" id="ielts_speaking" placeholder="Speaking"/>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="ielts_writing" class="col-md-offset-3 col-md-1 control-label">Writing : </label>
+            <div class="col-md-2">
+              <input type="number" min=1 max=9 step=0.5 ng-model="scores.ielts.writing" class="form-control" id="ielts_writing" placeholder="Writing"/>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Graduate level requirements-->
+      <div class="form-group">
+        <label for="msphd" class="col-md-2 control-label">For Masters/PhD</label>
+      </div>
+
+
+      <!-- GRE SCORES-->
+      <div class="form-group">
+        <label class="checkbox-inline col-md-offset-1">GRE<input type="checkbox" ng-model="scores.gre.present" ng-change="toggleSync('gre',scores.gre.present)"></label>
+        <div ng-show="scores.gre.present">
+          <div class="form-group">
+              <label for="gre_verbal" class="col-md-4 control-label">Verbal : </label>
+              <div class="col-md-2">
+                <input type="number" min=130 max=170 ng-model="scores.gre.verbal" class="form-control" id="gre_verbal" placeholder="Verbal"/>
+              </div>
+          </div>
+          <div class="form-group">
+              <label for="gre_quant" class="col-md-offset-3 col-md-1 control-label">Quant : </label>
+              <div class="col-md-2">
+                <input type="number" min=130 max=170 ng-model="scores.gre.quant" class="form-control" id="gre_quant" placeholder="Quant"/>
+              </div>
+          </div>
+          <div class="form-group">
+              <label for="gre_awa" class="col-md-offset-3 col-md-1 control-label">AWA : </label>
+              <div class="col-md-2">
+                <input type="number" min=0 max=6 step="0.5" ng-model="scores.gre.awa" class="form-control" id="gre_awa" placeholder="AWA"/>
+              </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- GRE SUBJECT SCORES-->
+      <div class="form-group">
+          <label class="checkbox-inline col-md-offset-1">GRE Subject<input type="checkbox" ng-model="scores.gre_subject.present" ng-change="toggleSync('gre_subject',scores.gre_subject.present)"></label>
+          <div ng-show="scores.gre_subject.present">
+            <div class="form-group">
+                <label for="gre_subject_subject" class="col-md-4 control-label">Subject : </label>
+                <div class="col-md-2">
+                  <select ng-model="scores.gre_subject.subject" class="form-control" id="gre_subject_subject" placeholder="Subject">
+                    <option>Biochemistry, Cell and Molecular Biology</option>
+                    <option>Biology</option>
+                    <option>Chemistry</option>
+                    <option>Literature in English</option>
+                    <option>Mathematics</option>
+                    <option>Physics</option>
+                    <option>Psychology</option>
+                  </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="gre_subject_total" class="col-md-4 control-label">Total : </label>
+                <div class="col-md-2">
+                  <input type="number" min=200 max=990 ng-model="scores.gre_subject.total" class="form-control" id="gre_subject_total" placeholder="Total"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="gre_subject_subtotal" class="col-md-4 control-label">Sub Score : </label>
+                <div class="col-md-2">
+                  <input type="number" min=20 max=99 ng-model="scores.gre_subject.subtotal" class="form-control" id="gre_subject_subtotal" placeholder="Sub Total"/>
+                </div>
+            </div>
+          </div>
+      </div>
+
+
+      <!-- GMAT SCORES-->
+      <div class="form-group">
+        <label class="checkbox-inline col-md-offset-1">GMAT<input type="checkbox" ng-model="scores.gmat.present" ng-change="toggleSync('gmat',scores.gmat.present)"></label>
+        <div ng-show="scores.gmat.present">
+          <div class="form-group">
+              <label for="gmat_total" class="col-md-4 control-label">Total : </label>
+              <div class="col-md-2">
+                <input type="number" min=200 max=800 ng-model="scores.gmat.total" class="form-control" id="gmat_total" placeholder="Total"/>
+              </div>
+          </div>
+          <div class="form-group">
+              <label for="gmat_verbal" class="col-md-4 control-label">Verbal : </label>
+              <div class="col-md-2">
+                <input type="number" min=0 max=60 ng-model="scores.gmat.verbal" class="form-control" id="gmat_verbal" placeholder="Verbal"/>
+              </div>
+          </div>
+          <div class="form-group">
+              <label for="gmat_quant" class="col-md-offset-3 col-md-1 control-label">Quant : </label>
+              <div class="col-md-2">
+                <input type="number" min=0 max=60 ng-model="scores.gmat.quant" class="form-control" id="gmat_quant" placeholder="Quant"/>
+              </div>
+          </div>
+          <div class="form-group">
+              <label for="gmat_awa" class="col-md-offset-3 col-md-1 control-label">AWA : </label>
+              <div class="col-md-2">
+                <input type="number" min=0 max=6 step="0.5" ng-model="scores.gmat.awa" class="form-control" id="gmat_awa" placeholder="AWA"/>
+              </div>
+          </div>
+          <div class="form-group">
+              <label for="gmat_reading" class="col-md-offset-3 col-md-1 control-label">Integrated Reading : </label>
+              <div class="col-md-2">
+                <input type="number" min=1 max=8 step="0.5" ng-model="scores.gmat.reading" class="form-control" id="gmat_reading" placeholder="Integrated Reading"/>
+              </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- LSAT SCORES-->
+      <div class="form-group">
+          <label class="checkbox-inline col-md-offset-1">LSAT<input type="checkbox" ng-model="scores.lsat.present" ng-change="toggleSync('lsat',scores.lsat.present)"></label>
+          <div ng-show="scores.lsat.present">
+            <div class="form-group">
+                <label for="lsat_total" class="col-md-4 control-label">Total : </label>
+                <div class="col-md-2">
+                  <input type="number" min=120 max=180 ng-model="scores.lsat.total" class="form-control" id="lsat_total" placeholder="Total"/>
+                </div>
+            </div>
+          </div>
+      </div>
+
+
+      <!--
+      <div class="form-group">
+          <label class="checkbox-inline col-md-offset-1">USMLE<input type="checkbox" ng-model="scores.usmle.present"></label>
+      </div>
+      <div class="form-group">
+          <label class="checkbox-inline col-md-offset-1">GGFNS<input type="checkbox" ng-model="scores.ggfns.present"></label>
+      </div>
+      -->
+
+
+      <!-- Undergrad level requirements-->
+      <!--
+      <div class="form-group">
+        <label for="ug" class="col-md-2 control-label">For undergraduates</label>
+      </div>
+      -->
+
+      <!-- SAT1 SCORES-->
+      <!--
+      <div class="form-group">
+        <label class="checkbox-inline col-md-offset-1">SAT - 1<input type="checkbox" ng-model="scores.sat1.present"></label>
+        <div ng-show="scores.sat1.present">
+          <div class="form-group">
+            <label for="sat1_total" class="col-md-4 control-label">Total : </label>
+            <div class="col-md-2">
+              <input type="number" min=400 max=1600 ng-model="scores.sat1.total" class="form-control" id="sat1_total" placeholder="Total"/>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="sat1_verbal" class="col-md-offset-3 col-md-1 control-label">Verbal : </label>
+            <div class="col-md-2">
+              <input type="number" min=200 max=800 ng-model="scores.sat1.verbal" class="form-control" id="sat1_verbal" placeholder="Reading"/>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="sat1_maths" class="col-md-offset-3 col-md-1 control-label">Mathematics:</label>
+            <div class="col-md-2">
+              <input type="number" min=200 max=800 ng-model="scores.sat1.maths" class="form-control" id="sat1_maths" placeholder="Listening"/>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="form-group">
+          <label class="checkbox-inline col-md-offset-1">SAT - 2<input type="checkbox" ng-model="scores.sat2.present"></label>
+      </div>
+      -->
+
+      <div class="form-group">
+        <div class="col-sm-offset-4 col-sm-8">
+          <input type="submit" class="btn btn-primary" value="Save"/>
+        </div>
+      </div>
+  </form>
+</div>
+
+<footer></footer>

@@ -1,0 +1,63 @@
+<navbar></navbar>
+
+<div class="container">
+  <h1>My Documents</h1>
+
+  <div class="row">
+    <div ng-repeat="doc in documents">
+    	<div class="col-md-offset-1 col-md-10">
+          <a class="HEADLINE" 	ng-href="http://localhost:9000{{doc.imageUrl}}" target="_blank">{{doc.file_name}}</a><a class="btn" ng-click="removeDocument(doc._id)">&#x2613</a>
+    	</div>
+    </div>
+  </div>
+
+  <center><h3 style="margin-bottom:45px">Upload a new document</h3></center>
+  <form class="form-horizontal" role="form" name="form">      
+        <div ng-show="errors" class="alert alert-danger" role="alert">
+          <strong>Error(s):</strong>
+          <p>{{errors}}</p>
+        </div>
+
+        <div class="row">
+        	<div class="form-group">
+
+		      <label for="filename" class="col-md-offset-2 col-md-2 control-label">File name : </label>
+		      <div class="col-md-3">
+			      <input type="text" name="filename" ng-model="filename" class="form-control" id="filename" placeholder="File Name" required/>
+			  </div>
+			  <div class="col-md-5">
+      			  <i ng-show="form.filename.$error.required">*required</i>
+			  </div>
+
+			  <div class="col-md-offset-4 col-md-2">
+			  	<div ngf-drop ngf-select ng-model="docFile" class="drop-box" ngf-drag-over-class="dragover" ngf-allow-dir="true" ngf-pattern="image/*,application/pdf" accept="image/*,application/pdf" ngf-max-size="5MB" ngf-model-invalid="errorFiles" name="file" required>Drop Images or PDF files here</div>
+			  	<div ngf-no-file-drop>File Drag/Drop is not supported for this browser</div>
+			  </div>
+		  	   <div class="col-md-4 col-md-offset-1 conditions">
+		        <i ng-show="form.file.$error.required">*required</i>
+		        <i ng-show="form.file.$error.maxSize">File too large {{errorFiles[0].size / 1000000|number:1}}MB: max 2M</i>
+
+			    <div ng-show="docFile">{{docFile.name}} {{docFile.$error}} {{docFile.$errorParam}}</div>
+			  </div>
+
+		  	  <div class="col-md-offset-4 col-md-3">
+				  <span class="progress" ng-show="docFile.progress >= 0">
+			        <div style="width:{{docFile.progress}}%" 
+			            ng-bind="docFile.progress + '%'"></div>
+			      </span>
+			  </div>
+		  	  <div class="col-md-4" style="margin-top: 25px;">
+			      <span ng-show="docFile.result">Upload Successful</span>
+			  </div>
+
+			</div>
+			  
+	    <div class="col-md-offset-5 col-md-6 shifter">
+	    	<button ng-disabled="!form.$valid" ng-click="uploadDocument(docFile)" class="btn btn-primary">Upload</button>
+	 	</div>
+  </form>
+
+
+</div>
+
+<footer></footer>
