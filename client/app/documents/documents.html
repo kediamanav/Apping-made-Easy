@@ -6,7 +6,7 @@
   <div class="row">
     <div ng-repeat="doc in documents">
     	<div class="col-md-offset-1 col-md-10">
-          <a class="HEADLINE" 	ng-href="http://localhost:9000{{doc.imageUrl}}" target="_blank">{{doc.file_name}}</a><a class="btn" ng-click="removeDocument(doc._id)">&#x2613</a>
+          <a class="HEADLINE" 	ng-href="{{doc.imageUrl}}" target="_blank">{{doc.file_name}}</a><a class="btn" ng-click="removeDocument(doc._id)">&#x2613</a>
     	</div>
     </div>
   </div>
