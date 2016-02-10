@@ -1,5 +1,7 @@
 # Apping
 
+View this project live at http://apping-trak.rhcloud.com
+
 This project aims to help MS/PhD aspirants organize all their applications at one place. They can create a new application and add all its requirements and then track the status of their application, recommendations, check if they satisfy test scores and upload documents.
 They can log in using social authentication or register from the app itself.
 
