@@ -19,15 +19,27 @@ exports.setup = function(User, config) {
     })
       .then(function(user) {
         if (!user) {
-          //console.log(profile);
-          user = new User({
-            firstname: profile.name.givenName,
-            lastname: profile.name.familyName,
-            email: profile.emails[0].value,
-            role: 'user',
-            provider: 'facebook',
-            facebook: profile._json
-          });
+          console.log(profile);
+          if(!profile.emails){
+            user = new User({
+              firstname: profile.name.givenName,
+              lastname: profile.name.familyName,
+              email: profile.name.givenName+"."+profile.name.familyName+"@facebook.com",
+              role: 'user',
+              provider: 'facebook',
+              facebook: profile._json
+            });
+          }
+          else{
+            user = new User({
+              firstname: profile.name.givenName,
+              lastname: profile.name.familyName,
+              email: profile.emails[0].value,
+              role: 'user',
+              provider: 'facebook',
+              facebook: profile._json
+            });
+          }
           user.saveAsync()
             .then(function(user) {
               return done(null, user[0]);
